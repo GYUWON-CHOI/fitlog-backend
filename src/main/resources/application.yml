@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fitlog
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  batch:
+    job:
+      enabled: false
+
+jwt:
+  secret: fitlog-secret-key-must-be-at-least-256-bits-long-for-security
+  expiration: 86400000
+
+cloud:
+  aws:
+    s3:
+      bucket: fitlog-bucket
+    region:
+      static: ap-northeast-2
+    credentials:
+      access-key: your-access-key
+      secret-key: your-secret-key
