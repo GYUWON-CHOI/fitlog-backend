@@ -66,3 +66,7 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzc5OTMxMTUwL
   "size": 270,
   "fit": "LOOSE"
 }
+
+### 유사도 배치 수동 실행
+POST http://localhost:8080/api/admin/batch/similarity
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzc5OTMxMTUwLCJleHAiOjE3ODAwMTc1NTB9._-GGcRBy7w6yyNnnuHPU-Ubnis9wNdFt6QvhNQhCDMpo39HMMLCAyWto3ph5BGzs
