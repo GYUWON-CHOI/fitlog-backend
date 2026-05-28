@@ -70,3 +70,44 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzc5OTMxMTUwL
 ### 유사도 배치 수동 실행
 POST http://localhost:8080/api/admin/batch/similarity
 Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzc5OTMxMTUwLCJleHAiOjE3ODAwMTc1NTB9._-GGcRBy7w6yyNnnuHPU-Ubnis9wNdFt6QvhNQhCDMpo39HMMLCAyWto3ph5BGzs
+
+### 추천 조회 (데이터 없는 경우)
+GET http://localhost:8080/api/recommendations?productId=1
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzc5OTMxMTUwLCJleHAiOjE3ODAwMTc1NTB9._-GGcRBy7w6yyNnnuHPU-Ubnis9wNdFt6QvhNQhCDMpo39HMMLCAyWto3ph5BGzs
+
+### 테스트용 유저2 회원가입
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{
+  "email": "test2@test.com",
+  "password": "test1234",
+  "nickname": "테스트유저2"
+}
+
+### 테스트용 유저2 로그인
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test2@test.com",
+  "password": "test1234"
+}
+
+### 유저2 아이템 등록 (유저2 토큰으로)
+POST http://localhost:8080/api/items
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzc5OTU5Nzc3LCJleHAiOjE3ODAwNDYxNzd9.yf2L7uWLcTireu6Zoges5vh9gDe8ERJ3nr-Pqedqh4RP1FVrY6J4ixHsKFkkU7qB
+
+{
+  "productId": 1,
+  "size": 270,
+  "fit": "PERFECT"
+}
+
+### 배치 재실행
+POST http://localhost:8080/api/admin/batch/similarity
+
+### 추천 재조회 (유저1 토큰으로)
+GET http://localhost:8080/api/recommendations?productId=1
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzc5OTU5ODI1LCJleHAiOjE3ODAwNDYyMjV9.RkMHUNlTgj07pNBm1v-wgEwuSGDVVJT0kEgHGyeCYM--zmYtKqBdJ6EE2_fv0tfq
