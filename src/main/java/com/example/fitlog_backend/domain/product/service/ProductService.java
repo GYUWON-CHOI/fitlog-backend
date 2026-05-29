@@ -20,7 +20,7 @@ public class ProductService {
   @Transactional
   public Product create(String name, String brand, String category,
       Integer sizeMin, Integer sizeMax, Integer sizeStep,
-      String thumbnailUrl) {
+      String thumbnailUrl, String modelNumber) {
     if (productRepository.existsByNameAndBrand(name, brand)) {
       throw new CustomException(HttpStatus.CONFLICT, "이미 등록된 제품입니다.");
     }
@@ -33,6 +33,7 @@ public class ProductService {
         .sizeMax(sizeMax)
         .sizeStep(sizeStep)
         .thumbnailUrl(thumbnailUrl)
+        .modelNumber(modelNumber)
         .build();
 
     return productRepository.save(product);
@@ -50,10 +51,10 @@ public class ProductService {
   }
 
   @Transactional
-  public void update(Long id, String name, String brand, String thumbnailUrl) {
+  public void update(Long id, String name, String brand, String thumbnailUrl, String modelNumber) {
     Product product = productRepository.findById(id)
         .orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "제품을 찾을 수 없습니다."));
-    product.update(name, brand, thumbnailUrl);
+    product.update(name, brand, thumbnailUrl, modelNumber);
   }
 
   @Transactional

@@ -37,6 +37,9 @@ public class Product {
 
   private String thumbnailUrl;
 
+  @Column(name = "model_number")
+  private String modelNumber;
+
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
 
@@ -54,9 +57,10 @@ public class Product {
     this.updatedAt = LocalDateTime.now();
   }
 
-  public void update(String name, String brand, String thumbnailUrl) {
+  public void update(String name, String brand, String thumbnailUrl, String modelNumber) {
     this.name = name;
     this.brand = brand;
     this.thumbnailUrl = thumbnailUrl;
+    this.modelNumber = modelNumber;
   }
 }

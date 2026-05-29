@@ -20,18 +20,16 @@ public class ProductController {
 
   private final ProductService productService;
 
-  // 관리자 - 제품 등록
   @PostMapping("/api/admin/products")
   public ResponseEntity<ApiResponse<?>> create(@RequestBody @Valid CreateProductRequest request) {
     Product product = productService.create(
         request.getName(), request.getBrand(), request.getCategory(),
         request.getSizeMin(), request.getSizeMax(), request.getSizeStep(),
-        request.getThumbnailUrl()
+        request.getThumbnailUrl(), request.getModelNumber()
     );
     return ResponseEntity.ok(ApiResponse.success("제품이 등록되었습니다.", Map.of("id", product.getId())));
   }
 
-  // 제품 목록 조회 (검색)
   @GetMapping("/api/products")
   public ResponseEntity<ApiResponse<?>> search(
       @RequestParam(required = false) String keyword,
@@ -49,13 +47,13 @@ public class ProductController {
           map.put("sizeMax", p.getSizeMax());
           map.put("sizeStep", p.getSizeStep());
           map.put("thumbnailUrl", p.getThumbnailUrl() != null ? p.getThumbnailUrl() : "");
+          map.put("modelNumber", p.getModelNumber() != null ? p.getModelNumber() : "");
           return map;
         })
         .toList();
     return ResponseEntity.ok(ApiResponse.success(result));
   }
 
-  // 제품 상세 조회
   @GetMapping("/api/products/{id}")
   public ResponseEntity<ApiResponse<?>> getById(@PathVariable Long id) {
     Product product = productService.getById(id);
@@ -67,20 +65,20 @@ public class ProductController {
         "sizeMin", product.getSizeMin(),
         "sizeMax", product.getSizeMax(),
         "sizeStep", product.getSizeStep(),
-        "thumbnailUrl", product.getThumbnailUrl() != null ? product.getThumbnailUrl() : ""
+        "thumbnailUrl", product.getThumbnailUrl() != null ? product.getThumbnailUrl() : "",
+        "modelNumber", product.getModelNumber() != null ? product.getModelNumber() : ""
     )));
   }
 
-  // 관리자 - 제품 수정
   @PatchMapping("/api/admin/products/{id}")
   public ResponseEntity<ApiResponse<?>> update(
       @PathVariable Long id,
       @RequestBody @Valid UpdateProductRequest request) {
-    productService.update(id, request.getName(), request.getBrand(), request.getThumbnailUrl());
+    productService.update(id, request.getName(), request.getBrand(),
+        request.getThumbnailUrl(), request.getModelNumber());
     return ResponseEntity.ok(ApiResponse.success("제품이 수정되었습니다.", null));
   }
 
-  // 관리자 - 제품 삭제
   @DeleteMapping("/api/admin/products/{id}")
   public ResponseEntity<ApiResponse<?>> delete(@PathVariable Long id) {
     productService.delete(id);
@@ -96,6 +94,7 @@ public class ProductController {
     @NotNull private Integer sizeMax;
     @NotNull private Integer sizeStep;
     private String thumbnailUrl;
+    private String modelNumber;
   }
 
   @Data
@@ -103,5 +102,6 @@ public class ProductController {
     @NotBlank private String name;
     @NotBlank private String brand;
     private String thumbnailUrl;
+    private String modelNumber;
   }
 }
