@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,15 +42,10 @@ public class RecommendationService {
         .map(s -> s.getUserB().getId())
         .toList();
 
-    // 4. 유사 유저 중 해당 제품 보유자 조회
-    List<UserItem> targetItems = userItemRepository.findByUserId(userId).stream()
-        .filter(item -> false) // 초기화용
-        .toList();
-
-    // 유사 유저들의 해당 제품 아이템 조회
+    // 4. 유사 유저들의 해당 제품 아이템 조회 (Fetch Join 사용)
     List<UserItem> similarUserItems = new ArrayList<>();
     for (Long similarUserId : similarUserIds) {
-      userItemRepository.findByUserId(similarUserId).stream()
+      userItemRepository.findByUserIdWithProduct(similarUserId).stream()
           .filter(item -> item.getProduct().getId().equals(productId))
           .forEach(similarUserItems::add);
     }

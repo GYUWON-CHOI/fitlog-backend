@@ -66,8 +66,9 @@ public class SimilarityCalculationBatch {
               u -> userItemRepository.findByUserId(u.getId())
           ));
 
-      // 3. 기존 유사도 데이터 전체 삭제
+      // 3. 기존 유사도 데이터 전체 삭제 후 flush
       userSimilarityRepository.deleteAll();
+      userSimilarityRepository.flush();
 
       // 4. 모든 유저 쌍 유사도 계산
       List<UserSimilarity> similarities = new ArrayList<>();

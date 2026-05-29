@@ -27,13 +27,13 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzc5OTMxMTUwLCJleHAiOjE3ODAwMTc1NTB9._-GGcRBy7w6yyNnnuHPU-Ubnis9wNdFt6QvhNQhCDMpo39HMMLCAyWto3ph5BGzs
 
 {
-  "name": "나이키 에어포스1 로우",
-  "brand": "Nike",
+  "name": "조던 1 레트로 로우 OG 울프 그레이 앤 화이트",
+  "brand": "Jordan",
   "category": "SHOES",
-  "sizeMin": 230,
-  "sizeMax": 310,
+  "sizeMin": 250,
+  "sizeMax": 320,
   "sizeStep": 5,
-  "thumbnailUrl": ""
+  "thumbnailUrl": "https://kream-phinf.pstatic.net/MjAyNTA1MDhfMjk2/MDAxNzQ2Njg1NDI0NDc5.VouT2TQhyHgHvO4E5PMQIFk5VnMdpkXzJX_TWWODkXYg.SoGASddHUL9bwI6O0MEbgJ4cQCMAR3KBUBHJop9sITsg.PNG/a_00cb745ac73647008a50a27e292aa9eb.png?type=l_webp"
 }
 
 ### 제품 목록 조회
@@ -111,3 +111,6 @@ POST http://localhost:8080/api/admin/batch/similarity
 ### 추천 재조회 (유저1 토큰으로)
 GET http://localhost:8080/api/recommendations?productId=1
 Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzc5OTU5ODI1LCJleHAiOjE3ODAwNDYyMjV9.RkMHUNlTgj07pNBm1v-wgEwuSGDVVJT0kEgHGyeCYM--zmYtKqBdJ6EE2_fv0tfq
+
+###
+POST http://localhost:8080/api/admin/batch/similarity
