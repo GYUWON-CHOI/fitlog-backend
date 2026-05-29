@@ -35,6 +35,7 @@ public class UserItemController {
           map.put("brand", item.getProduct().getBrand());
           map.put("size", item.getSize());
           map.put("fit", item.getFit());
+          map.put("thumbnailUrl", item.getProduct().getThumbnailUrl() != null ? item.getProduct().getThumbnailUrl() : "");
           return map;
         })
         .toList();

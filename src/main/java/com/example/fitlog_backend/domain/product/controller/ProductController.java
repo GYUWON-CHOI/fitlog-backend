@@ -48,6 +48,7 @@ public class ProductController {
           map.put("sizeMin", p.getSizeMin());
           map.put("sizeMax", p.getSizeMax());
           map.put("sizeStep", p.getSizeStep());
+          map.put("thumbnailUrl", p.getThumbnailUrl() != null ? p.getThumbnailUrl() : "");
           return map;
         })
         .toList();
